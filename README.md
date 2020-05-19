@@ -1,2 +1,3 @@
-# jsPsychSheet
-A JavaScript library to use jsPsych and Google Sheet to run behavioural experiments online
+![banner](images/jsPsychSheet.png)
+
+**jsPsychSheet** is a simple JavaScript library to use jsPsych and Google Sheet to run behavioural experiments online. [jsPsych](https://www.jspsych.org/) is one of the popular JavaScript library used to design behavioural experiments to run in a web browser. But to host those experiments online you need a server (which is not always free) as well as some knowledge about server side coding is also required. jsPsychSheet solves that problem by using Google Appscript to host your designed experiment and save your data directly into your google sheet. The best part is that you just need to add very few extra lines to your designed jsPsych experiment!
