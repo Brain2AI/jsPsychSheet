@@ -1,4 +1,4 @@
-// jspsychsheet - A simple JavaScript library to use jsPsych and Google Sheet Appscript to run behavioural experiments online.
+// jspsychsheet - A simple JavaScript library to use jsPsych and Google Sheet Apps Script to run behavioral experiments online.
 // Created by Shashi Kant Gupta, May 19, 2020.
 
 var jsPsychSheet = {
