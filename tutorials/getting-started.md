@@ -136,7 +136,7 @@ A pop-up will be displayed asking the file name, write `index.html` and click "O
 
 ![filename](images/getting_started/6.png)
 
-Replace the contents of `index.html` with the contents of your [modified experiment](../experiment/demo-simple-rt-task-modified-inbetween-data-update.html). After that click on `Publish >> Deploy as web app...`
+Replace the contents of `index.html` with the contents of your [modified experiment](../experiment/demo-simple-rt-task-modified.html). After that click on `Publish >> Deploy as web app...`
 
 ![deploy](images/getting_started/7.png)
 
