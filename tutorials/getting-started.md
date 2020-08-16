@@ -19,7 +19,7 @@ Now design your experiment using [jsPsych](https://www.jspsych.org/) inside the 
 
 ![experiment](images/getting_started/3.png)
 
-Check the [original experiment](experiment/demo-simple-rt-task.html) file before modification.
+Check the [original experiment](../experiment/demo-simple-rt-task.html) file before modification.
 
 ## Step 2: Modify your jsPsych experiment to use jsPsychSheet
 To use the jsPsych experiment with Google Apps Script, we first change all the local image/file sources to use the source from your GitHub repo. Add the following line at the begning of each of your local sources: `https://your-github-username.github.io/jsPsychSheet/experiment/`. Replace `your-github-username` with your actual GitHub username, for eg: `https://brain2ai.github.io/jsPsychSheet/experiment/`. So, in our example experiment we will have to do following changes:
