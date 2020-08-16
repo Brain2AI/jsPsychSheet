@@ -83,13 +83,13 @@ timeline.push(upload_block);
 
 Check the [modified experiment](../experiment/demo-simple-rt-task-modified-inbetween-data-update.html) file.
 
-## Other method [for expertsas
-There are two methods defined in jsPsychSheet by which it uploads data to Google Sheet. You can either upload the data at the end of the trial for that you need to call the following function:
+## Other method [for experts]
+There are two methods defined in jsPsychSheet by which it uploads data to Google Sheet. You can either upload the data at the end of the experiment for that you need to call the following function inside `jsPsych.init`:
 ```js
 jsPsychSheet.uploadData(jsPsych.data.get().csv());
 ```
 
-In cases, where you want to upload your data to Google Sheet in between the trials, you can simply add one extra attribute to the function. i.e.
+In cases, where you want to upload your data to Google Sheet in between the trials, you can simply add one extra attribute to the `jsPsychSheet.uploadData` function. i.e.
 ```js
 jsPsychSheet.uploadData(jsPsych.data.get().csv(), 1);
 ```
@@ -110,4 +110,4 @@ timeline.push(test_procedure);
 
 But we do not recommend to use this method mostly because of the following reasons:
 * jsPsych builds your overall data in dynamic manner and it may happen that some extra column being added to the experiment after wards, which won't get updated in your Google Sheet.
-* This may create delays in your experiment trials, if your experiment involves reaction time studies then we strongly advise you to not use this shortcut.
+* This may create delays in your experiment trials, if your experiment involves reaction time studies then we strongly advise you to not use this shortcut and follow the recommended method.
