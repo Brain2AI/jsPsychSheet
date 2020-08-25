@@ -14,7 +14,7 @@ de Leeuw, J.R. (2015). jsPsych: A JavaScript library for creating behavioral exp
 
 Also please reference this repo if you use it anywhere.
 
-Shashi Kant Gupta. (2020, May 29). jsPsychSheet: A simple JavaScript library that uses jsPsych and Google Sheet for running behavioral experiments online (Version v1.0.1). Zenodo. http://doi.org/10.5281/zenodo.3864654
+Shashi Kant Gupta. (2020, May 29). jsPsychSheet: A simple JavaScript library that uses jsPsych and Google Sheet for running behavioral experiments online. Zenodo. [![DOI](https://zenodo.org/badge/265108176.svg)](https://zenodo.org/badge/latestdoi/265108176)
 
 ## License
 Licensed under [MIT license](LICENSE). Please reference this github repo if used anywhere.
