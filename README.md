@@ -14,8 +14,8 @@ The pandemic allowed us to explore the benefits of shifting behavioral online be
 
 ## Tutorials on how to use jsPsychSheet
 
-* [Getting started with jsPsychSheet: Storing jsPsych experiment data in Google Sheets](http://brain2ai.in/jsPsychSheet/tutorials/getting-started.md)
-* [Tutorial on how to upload your experiment data in between the trials](http://brain2ai.in/jsPsychSheet/tutorials/uploading-exp-data-inbetween-trials.md)
+* [Getting started with jsPsychSheet: Storing jsPsych experiment data in Google Sheets](http://brain2ai.in/jsPsychSheet/tutorials/getting-started.html)
+* [Tutorial on how to upload your experiment data in between the trials](http://brain2ai.in/jsPsychSheet/tutorials/uploading-exp-data-inbetween-trials.html)
 
 ## Citation and reference
 Please reference this repo if you use it anywhere. You can use the below citation if you use it in any academic setting.
