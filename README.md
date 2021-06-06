@@ -23,4 +23,4 @@ Please reference this repo if you use it anywhere. You can use the below citatio
 Shashi Kant Gupta. (2020, May 29). jsPsychSheet: A simple JavaScript library that uses jsPsych and Google Sheet for running behavioral experiments online. Zenodo. [![DOI](https://zenodo.org/badge/265108176.svg)](https://zenodo.org/badge/latestdoi/265108176)
 
 ## License
-Licensed under the GNU General Public License v3.0. See the complete licence [HERE](LICENSE)
+Licensed under the MIT License. The license file is [here](LICENSE). Reference this repository if you use it in your work.
