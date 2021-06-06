@@ -1,158 +1,139 @@
-# Getting started with jsPsychSheet: Running jsPsych experiments on Google Apps Script using jsPsychSheet
-Three basic steps are needed to run a jsPsych experiment on Google Apps Script:
-* Fork [jsPsychSheet](https://github.com/Brain2AI/jsPsychSheet) repo to your own github account and design your experiment inside the experiment folder.
+# Getting started with jsPsychSheet: Storing jsPsych experiment data in Google Sheets
 
-* Modify your jsPsych experiment to use jsPsychSheet
+Three basic steps are needed to run a jsPsych experiment and store subjects data on Google Sheets:
+* Prepare Google Sheets to receive subjects data.
 
-* Host your experiment on Google Apps Script
+* Modify your jsPsych experiment to use jsPsychSheet.
 
-## Step 1: Fork jsPsychSheet repo to your own github account and design your experiment inside the experiment folder.
-After forking jsPsychSheet repo. Go to your forked repo and deploy it as GitHub pages. To do that click on **Settings**.
+* Host your experiment on web!
 
-![settings](images/getting_started/1.png)
+## Step 1: Prepare Google Sheets to receive subjects data.
 
-Within settings navigate to GitHub Pages and select master branch as source. And thats all your repo is deployed as a github page.
+1. Goto [Google Drive](https://drive.google.com/drive/my-drive) and create a "Blank spreadsheet". Give it a name for example `jsPsychSheet Demo`. Next goto `Tools` and click on `Script editor`.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/2.png">
+</div>
 
-![source](images/getting_started/2.png)
+1. A new tab will open with an editor for Google Apps Script. See below for an example. Select `Code.gs` from the left sidebar as shown in the image below.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/3.png">
+</div>
 
-Now design your experiment using [jsPsych](https://www.jspsych.org/) inside the `jsPsychSheet/experiment` folder. As an example we will use jsPsych's tutorial [Simple Reaction Time Task](https://www.jspsych.org/tutorials/rt-task/). No need to download jsPsych files, simply use the jsPsych files from `jsPsychSheet/jspsych`.
+1. You can give a unique name to your Apps Script for example `jsPsychSheet Demo`. Now replace the contents of the `Code.gs` in Apps Script tab with the contents of the `Code.gs` file provided [here](../Code.gs). After replacement of the contents, it should look like the below screenshot:
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/4.png">
+</div>
 
-![experiment](images/getting_started/3.png)
+1. Now, go to the top-right corner and click on `Deploy` and then select `New deployment`.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/5.png">
+</div>
 
-Check the [original experiment](../experiment/demo-simple-rt-task.html) file before modification.
+1. This will open a pop-up window with title "New deployment". Click on the `Select type` icon and select `Web app`.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/7.png">
+</div>
 
-## Step 2: Modify your jsPsych experiment to use jsPsychSheet
-To use the jsPsych experiment with Google Apps Script, we first change all the local image/file sources to use the source from your GitHub repo. Add the following line at the begning of each of your local sources: `https://your-github-username.github.io/jsPsychSheet/experiment/`. Replace `your-github-username` with your actual GitHub username, for eg: `https://brain2ai.github.io/jsPsychSheet/experiment/`. So, in our example experiment we will have to do following changes:
+1. Then select the options as shown inside the red box in the below image. After that click on `Deploy`
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/8.png">
+</div>
 
-**Before:**
+1. After you click on `Deploy`. It will ask you to authrize access to the Google Sheets. Click on `Autorize access`
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/9.png">
+</div>
+
+1. This will open a new window to grant access right from your Google account. Select your Google account with the same one which you used to create the Google Sheet. After you select you google account, it say "Google hasn't verified this app". There click on `Advanced` and then `Go to jsPsychSheet Demo (unsafe)`. Note that here jsPsychSheet Demo is the name of Apps Script that intially defined.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/11.png">
+</div>
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/12.png">
+</div>
+
+1. On next page, it will show that jsPsychSheet Demo wants to access your Google Account. Click on the `Allow` button.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/13.png">
+</div>
+
+1. Now on the Apps Script page, you will see a success message as shown in the image below. Copy the `Web app URL` for later use.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/14.png">
+</div>
+
+## Step 2: Modify your jsPsych experiment to use jsPsychSheet.
+
+Assuming that you have already designed your web experiment using [jsPsych](https://www.jspsych.org/). You need to do only a minor change in the experiment's html file. As an example we will use jsPsych's tutorial [Simple Reaction Time Task](https://www.jspsych.org/tutorials/rt-task/) to show what changes you need to do. This is how most of your jsPsych experiment directory will look like:
+
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/15.png">
+</div>
+
+Here `/jspsych` directory contains the latest version of jsPsych package. `/img` directory contains some image stimuli to be used in the experiment. And `index.html` is our designed experiment's html file. We only need to make changes in the `index.html` file so that it can send the subjects data to Google Sheets.
+
+#### You need to do following changes:
+
+Import `jsPsychSheet` and `jQuery` by adding the following lines inside the `<head>...</head>` tags.
+
 ```html
-"<div style='float: left;'><img src='img/blue.png'></img>" +
-"<p class='small'><strong>Press the F key</strong></p></div>" +
-"<div class='float: right;'><img src='img/orange.png'></img>" +
-"<p class='small'><strong>Press the J key</strong></p></div>" +
-```
-```js
-var test_stimuli = [
-  { stimulus: "img/blue.png", data: { test_part: 'test', correct_response: 'f' } },
-  { stimulus: "img/orange.png", data: { test_part: 'test', correct_response: 'j' } }
-];
-```
-**After:**
-```html
-"<div style='float: left;'><img src='https://brain2ai.github.io/jsPsychSheet/experiment/img/blue.png'></img>" +
-"<p class='small'><strong>Press the F key</strong></p></div>" +
-"<div class='float: right;'><img src='https://brain2ai.github.io/jsPsychSheet/experiment/img/orange.png'></img>" +
-"<p class='small'><strong>Press the J key</strong></p></div>" +
-```
-```js
-var test_stimuli = [
-  { stimulus: "https://brain2ai.github.io/jsPsychSheet/experiment/img/blue.png", data: { test_part: 'test', correct_response: 'f' } },
-  { stimulus: "https://brain2ai.github.io/jsPsychSheet/experiment/img/orange.png", data: { test_part: 'test', correct_response: 'j' } }
-];
-```
-
-Next we replace jsPsych library with our online hosted jsPsych library and additionaly add our jsPsychSheet library. Add following lines to the `<head>` of the html file.
-
-**Before:**
-```html
-<script src="../jspsych/jspsych.js"></script>
-<script src="../jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-<script src="../jspsych/plugins/jspsych-image-keyboard-response.js"></script>
-<link rel="stylesheet" href="../jspsych/css/jspsych.css">
-```
-**After:**
-```html
-<!-- jsPsych library -->
-<base target="_top">
-<!-- jsPsych library -->
-<script src="https://brain2ai.in/jsPsychSheet/jspsych/jspsych.js"></script>
-<script src="https://brain2ai.in/jsPsychSheet/jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-<script src="https://brain2ai.in/jsPsychSheet/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
-<link rel="stylesheet" href="https://brain2ai.in/jsPsychSheet/jspsych/css/jspsych.css">
-
 <!-- jsPsychSheet library -->
-<script src="https://brain2ai.in/jsPsychSheet/jspsychsheet.js"></script>
-<link rel="stylesheet" href="https://brain2ai.in/jsPsychSheet/jspsychsheet.css">
+<script src="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.js"></script>
+<link rel="stylesheet" href="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.css">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 ```
 
-Now, send your experiment data to jsPsychSheet by calling `jsPsychSheet.uploadData(jsPsych.data.get().csv())` function on finish of your experiment. Do the below change:
+Send the experiment data to jsPsychSheet by calling `jsPsychSheet.uploadData(<Web app URL>, jsPsych.data.get().csv())` function `on_finish` of your experiment inside the `jsPsych.init(...)` function call. Here `<Web app URL>` is the URL that you copied after deploying the Google Apps Script. For example you will have to do the following:
 ```js
 jsPsych.init({
   timeline: timeline,
   show_progress_bar: true,
-  on_finish: function() {
-      jsPsychSheet.uploadData(jsPsych.data.get().csv());
+  on_finish: function () {
+    url = "https://script.google.com/macros/s/AKfycbzWarG1igduvFgcS8noKcvJ_RCX_ajtlYJQ1cOrCpTFtCrlaFlqSv-Cg2JJDQciFs4ePA/exec";
+    jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
   }
 });
 ```
 
-Check the [modified experiment](../experiment/demo-simple-rt-task-modified.html) file. Push your changes to your jsPsychSheet forked repo on GitHub.
+Rest of the things will be taken care of by the jsPsychSheet library. It will send the data to Apps Script which will then save it inside the linked Google Sheet that you created in the begning of the tutorial. You can compare the differences between the [original jsPsych experiment](../experiment/demo-simple-rt-task.html) file with the [modified experiment](../experiment/demo-simple-rt-task-modified.html) file.
 
-## Step 3: Host your experiment on Google Apps Script
-Goto your [google drive](https://drive.google.com/drive/my-drive) and create a "Blank spreadsheet". Now goto Tools and click on "Script editor". A new tab will open with an editor.
+## Step 3: Host your experiment on the web!
 
-![script](images/getting_started/4.png)
+So, this is the final step to get your experiment running online. If have your own web space and domain name you can simply upload all the experiment files there. Or you can use [GitHub Pages](https://pages.github.com/) to host your experiments file for FREE. Follow the steps shown below to use GitHub Pages:
 
-You will see a `Code.gs` tab inside the editor. Replace its content with the following:
+1. Open your GitHub profile and create a new public repository:
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/16.png">
+</div>
 
-```js
-// App Script function to host the html page
-function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index');
-}
+1. If you are familier with Git and GitHub, use you preferred way of adding files to your newly created repository. If you are not familier, you can simply follow a simple drag drop method to upload your experiment files. Once you create the repository, GitHub will take you to the repository page where you can find the following link to upload files `uploading an existing file`.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/17.png">
+</div>
 
-// App Script function to interact with google sheet
-function addData(data) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.insertSheet(0);
-  var i;
-  for(i=0; i< data.length; i++){
-    sheet.appendRow(data[i]);
-  }
-}
+1. Clicking on that link will open a simple drag and drop file upload method. Drag the experiment html file along with the folders and drop on the area shown. You can directly drag and drop the complete folder, there's no need to individually upload the files inside a given folder. Do not use `choose your files`, that will not support uploading of folders. After all the files gets uploaded click on the `Commit changes` button. This will add all the files to your GitHub repository.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/18.png">
+</div>
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/19.png">
+</div>
 
-// App Script function to interact with google sheet
-function addDataMultiBlock(data, start=0) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+1. Now open the `Settings` page:
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/20.png">
+</div>
 
-  if (start == 1){
-    var sheet = ss.insertSheet(0);
-  } else {
-    var sheet = ss.getActiveSheet();
-  }
+1. In the settings page, you will see a `Pages` tab in the left-bar. Click on it and then select the options as shown in the image below and then click on the `Save` button.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/21.png">
+</div>
 
-  var i;
-  for(i=0; i< data.length; i++){
-    sheet.appendRow(data[i]);
-  }
-}
-```
+1. After this you will see a confirmation message that your site is ready to be published. Copy the link inside blue box. After 2-3 minutes your experiment will be live on that link.
+<div style="border-style: solid; margin: 10px 0px; text-align: center">
+  <img src="images/getting_started/22.png">
+</div>
 
-Now click on `File >> New >> HTML file`
-
-![newhtml](images/getting_started/5.png)
-
-A pop-up will be displayed asking the file name, write `index.html` and click "OK"
-
-![filename](images/getting_started/6.png)
-
-Replace the contents of `index.html` with the contents of your [modified experiment](../experiment/demo-simple-rt-task-modified.html). After that click on `Publish >> Deploy as web app...`
-
-![deploy](images/getting_started/7.png)
-
-Select with whom you have to share your experiment with, select "Anyone, even anonymous" to share without email verification. And then click on `Deploy`
-
-![ver](images/getting_started/8.png)
-
-Grant the app permission to access google sheet data.
-
-![perm](images/getting_started/9.png)
-
-Congratulations! your experiment is now live... Copy the URL given and share it among your subjects for experiment.
-
-![url](images/getting_started/10.png)
-
-## Accessing your experiment data?
-All the experiment data will be stored in the google spreadsheet which you created. For each of the subject, jsPsychSheet will create a separate sheet inside your spreadsheet.
-
-![sheet](images/getting_started/11.png)
+Now you can run the experiment by opening the link or share it with your subjects to complete it. At completion of the experiment by the subject, the data will be uploaded to Google Sheets. jsPsychSheet will automatically give unique IDs to every new instance of the experiment. This ID will be represented by the `sheet_sub_id` column in the spreadheet. If you want to remove data from anyone of the subjects, simply delete it from your spreadsheet.

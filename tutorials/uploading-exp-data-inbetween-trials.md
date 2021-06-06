@@ -56,7 +56,8 @@ var upload_block = {
   type: "html-keyboard-response",
   stimulus: 'Phase one completed. Press any key to continue.',
   on_finish: function() {
-      jsPsychSheet.uploadData(jsPsych.data.get().csv(), 1);
+    url = "https://script.google.com/macros/s/AKfycbyvzdoeX-lcyHe-h7ibYKm2UQvFrXqLFBOUH6Db7s0eAPlr-z4fWfmBBLyWhEVFerdCDw/exec";
+    jsPsychSheet.uploadPartialData(url, jsPsych.data.get().csv())
   }
 }
 timeline.push(upload_block);
@@ -75,7 +76,8 @@ var upload_block = {
   type: "html-keyboard-response",
   stimulus: 'Phase two completed. Press any key to see your results.',
   on_finish: function() {
-      jsPsychSheet.uploadData(jsPsych.data.get().csv(), 1);
+    url = "https://script.google.com/macros/s/AKfycbyvzdoeX-lcyHe-h7ibYKm2UQvFrXqLFBOUH6Db7s0eAPlr-z4fWfmBBLyWhEVFerdCDw/exec";
+    jsPsychSheet.uploadPartialData(url, jsPsych.data.get().csv())
   }
 }
 timeline.push(upload_block);
@@ -86,12 +88,12 @@ Check the [modified experiment](../experiment/demo-simple-rt-task-modified-inbet
 ## Other method [for experts]
 There are two methods defined in jsPsychSheet by which it uploads data to Google Sheet. You can either upload the data at the end of the experiment for that you need to call the following function inside `jsPsych.init`:
 ```js
-jsPsychSheet.uploadData(jsPsych.data.get().csv());
+jsPsychSheet.uploadData(<Web app URL>, jsPsych.data.get().csv())
 ```
 
-In cases, where you want to upload your data to Google Sheet in between the trials, you can simply add one extra attribute to the `jsPsychSheet.uploadData` function. i.e.
+In cases, if you want to upload your data to Google Sheet in between the trials, you can use the following function call inside the trials `on_finish` function:
 ```js
-jsPsychSheet.uploadData(jsPsych.data.get().csv(), 1);
+jsPsychSheet.uploadPartialData(<Web app URL>, jsPsych.data.get().csv())
 ```
 
 So the previous, task can be achieved by simply adding the following attribute to the jsPsych experiment block:
@@ -102,12 +104,13 @@ var test_procedure = {
   repetitions: 5,
   randomize_order: true,
   on_finish: function() {
-      jsPsychSheet.uploadData(jsPsych.data.get().csv(), 1);
+    url = "https://script.google.com/macros/s/AKfycbyvzdoeX-lcyHe-h7ibYKm2UQvFrXqLFBOUH6Db7s0eAPlr-z4fWfmBBLyWhEVFerdCDw/exec";
+    jsPsychSheet.uploadPartialData(url, jsPsych.data.get().csv())
   }
 }
 timeline.push(test_procedure);
 ```
 
 But we do not recommend to use this method mostly because of the following reasons:
-* jsPsych builds your overall data in dynamic manner and it may happen that some extra column being added to the experiment after wards, which won't get updated in your Google Sheet.
+* This will force jsPsychSheet to make very frequent request to Apps Script to update the Google Sheets data. Which can sometime create error if the last request is not finished.
 * This may create delays in your experiment trials, if your experiment involves reaction time studies then we strongly advise you to not use this shortcut and follow the recommended method.
